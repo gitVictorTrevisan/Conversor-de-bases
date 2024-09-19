@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .container {
+        padding: 50px;
+        
+        text-align: center;
+        border-radius: 50px;
+        background: #3E4346;
+        box-shadow:  20px 20px 60px #35393c,
+                    -20px -20px 60px #474d51;        
+    }
+
+    #div_resultado {
+        text-align: center;
+        float: left;
+        width: fit-content;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        border-radius: 50px;
+        background: #3E4346;
+        box-shadow:  20px 20px 60px #35393c,
+                    -20px -20px 60px #474d51;
+    }
+    #ipt_calculadora{
+        border: none;
+        outline: none;
+        border-radius: 15px;
+        padding: 1em;
+        background-color: #3E4346;
+        box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+        transition: 300ms ease-in-out;
+    }
+    .main_button {
+        margin: 5px;
+        margin-left: 10px;
+        color: #090909;
+        padding: 0.7em 1.7em;
+        font-size: 18px;
+        border-radius: 0.5em;
+        background: #D75E3D;
+        cursor: pointer;
+        border: 1px solid #D75E3D;
+        transition: all 0.3s;
+        box-shadow: 6px 6px 12px #2c2b2b, -6px -6px 12px #606060;
+    }
+    .main_button:active {
+        color: #666;
+        box-shadow: inset 4px 4px 12px #606060, inset -4px -4px 12px #525252;
+}
+    .radio_base{
+        color: #f0f8ff;
+    }
+    .radio_resultado{
+        color: #f0f8ff;
+    }
+    .div_base{
+        color: #f0f8ff;
+    }
+    .div_base_resultado{
+        color: #f0f8ff;
+    }
+   
+</style>
+<body bgcolor="#3E4346">
+    
+    <h1 class="container" style="color: #f0f8ff;">CONVERSOR DE BASES</h1>
+
+    <div class="div_base">Selecione a base a ser convertida</div>
+    <p class="radio_base">
+        <label>
+            <input type="radio" name="seletor_base" id="seletor_base_binario"> Binário            
+        </label>
+        <label>
+            <input type="radio" name="seletor_base" id="seletor_base_octal"> Octal
+        </label>
+        <label>
+            <input type="radio" name="seletor_base" id="seletor_base_decimal"> Decimal
+        </label>
+        <label>
+            <input type="radio" name="seletor_base" id="seletor_base_hexadecimal"> Hexadecimal
+        </label>
+    </p>
+    <div class="div_base_resultado">Selecione a base que deseja o resulatdo</div>
+    <p class="radio_resultado">
+        <label>
+            <input type="radio" name="seletor_resultado" id="seletor_resultado_binario"> Binário            
+        </label>
+        <label>
+            <input type="radio" name="seletor_resultado" id="seletor_resultado_octal"> Octal            
+        </label>
+        <label>
+            <input type="radio" name="seletor_resultado" id="seletor_resultado_decimal"> Decimal            
+        </label>
+        <label>
+            <input type="radio" name="seletor_resultado" id="seletor_resultado_hexadecimal"> Hexadecimal            
+        </label>
+    </p>
+    <p>
+        <input style="color: #f0f8ff;" type="text" id="ipt_calculadora">
+        <button class="main_button" onclick="converter()">Calcular</button>
+    </p>
+    <p>
+        <div style="color: #f0f8ff; font-size:large;" id="div_resultado">0</div>
+    </p>
+</body>
+</html>
+
+<script>
+    function converter() {
+        var baseBinario = seletor_base_binario.checked
+        var baseOctal = seletor_base_octal.checked
+        var baseDecimal = seletor_base_decimal.checked
+        var baseHexadecimal = seletor_base_hexadecimal.checked
+        var resultadoBinario = seletor_resultado_binario.checked
+        var resultadoOctal = seletor_resultado_octal.checked
+        var resultadoDecimal = seletor_resultado_decimal.checked
+        var resultadoHexadecimal = seletor_resultado_hexadecimal.checked
+        var num = ipt_calculadora.value
+        
+        if (baseBinario && resultadoOctal) {
+            var baseToDecimal = parseInt(num, 2)
+            var conversao = baseToDecimal.toString(8)
+            document.getElementById("div_resultado").innerHTML = ` ${conversao}`;
+        }
+        if (baseBinario && resultadoDecimal) {
+            var baseToDecimal = parseInt(num, 2)
+            document.getElementById("div_resultado").innerHTML = ` ${baseToDecimal}`;
+        }
+        if (baseBinario && resultadoHexadecimal) {
+            var baseToDecimal = parseInt(num, 2)
+            var conversao = baseToDecimal.toString(16)
+            document.getElementById("div_resultado").innerHTML = ` ${conversao}`;
+        }
+        if (baseOctal && resultadoBinario) {
+            var baseToDecimal = parseInt(num, 8)
+            var conversao = baseToDecimal.toString(2)
+            document.getElementById("div_resultado").innerHTML = ` ${conversao}`;
+        }
+        if (baseOctal && resultadoDecimal) {
+            var baseToDecimal = parseInt(num, 8)
+            document.getElementById("div_resultado").innerHTML = ` ${baseToDecimal}`;
+        }
+        if (baseOctal && resultadoHexadecimal) {
+            var baseToDecimal = parseInt(num, 8)
+            var conversao = baseToDecimal.toString(16)
+            document.getElementById("div_resultado").innerHTML = ` ${conversao}`;
+        }
+        if (baseDecimal && resultadoBinario) {
+            var numero = Number(ipt_calculadora.value)
+            var conversao = numero.toString(2)
+            document.getElementById("div_resultado").innerHTML = ` ${conversao}`;
+        }
+        if (baseDecimal && resultadoOctal) {
+            var numero = Number(ipt_calculadora.value)
+            var conversao = numero.toString(8)
+            document.getElementById("div_resultado").innerHTML = ` ${conversao}`;
+        }
+        if (baseDecimal && resultadoHexadecimal) {
+            var numero = Number(ipt_calculadora.value)
+            var conversao = numero.toString(16)
+            document.getElementById("div_resultado").innerHTML = ` ${conversao}`;
+        }
+        if (baseHexadecimal && resultadoBinario) {
+            var baseToDecimal = parseInt(num, 16)
+            var conversao = baseToDecimal.toString(2)
+            document.getElementById("div_resultado").innerHTML = ` ${conversao}`;
+        }
+        if (baseHexadecimal && resultadoDecimal) {
+            var baseToDecimal = parseInt(num, 16)
+            document.getElementById("div_resultado").innerHTML = ` ${baseToDecimal}`;
+        }
+        if (baseHexadecimal && resultadoOctal) {
+            var baseToDecimal = parseInt(num, 16)
+            var conversao = baseToDecimal.toString(8)
+            document.getElementById("div_resultado").innerHTML = ` ${conversao}`;
+        }
+    }
+</script>
